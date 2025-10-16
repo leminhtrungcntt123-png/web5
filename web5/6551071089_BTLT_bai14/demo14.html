@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Toggle Theme - Light/Dark</title>
+    <!-- Gọi thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      /* Reset cơ bản */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        transition: background-color 0.5s ease, color 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      /* Giao diện nền sáng */
+      body.light-mode {
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      /* Giao diện nền tối */
+      body.dark-mode {
+        background-color: #222;
+        color: #f5f5f5;
+      }
+
+      /* IMAGE EFFECT */
+      .image-effect img {
+        width: 200px;
+        display: none;
+      }
+
+      #theme-icon-on {
+        display: block;
+      }
+
+      /* SWITCH BUTTON */
+      .onoffswitch {
+        position: relative;
+        width: 90px;
+        display: inline-block;
+        user-select: none;
+      }
+
+      .onoffswitch-checkbox {
+        display: none;
+      }
+
+      .onoffswitch-label {
+        display: block;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid #999;
+        border-radius: 50px;
+      }
+
+      .onoffswitch-inner {
+        display: block;
+        width: 200%;
+        margin-left: -100%;
+        transition: margin 0.3s ease-in;
+      }
+
+      .onoffswitch-inner:before,
+      .onoffswitch-inner:after {
+        display: block;
+        float: left;
+        width: 50%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        color: white;
+        font-weight: bold;
+        box-sizing: border-box;
+      }
+
+      .onoffswitch-inner:before {
+        content: "ON";
+        padding-left: 20px;
+        background-color: #34a853;
+        color: white;
+      }
+
+      .onoffswitch-inner:after {
+        content: "OFF";
+        padding-right: 20px;
+        background-color: #999;
+        color: white;
+        text-align: right;
+      }
+
+      .onoffswitch-switch {
+        display: block;
+        width: 30px;
+        margin: 5px;
+        background: white;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 48px;
+        border: 2px solid #999;
+        border-radius: 50px;
+        transition: all 0.3s ease-in 0s;
+      }
+
+      .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+        margin-left: 0;
+      }
+
+      .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+        right: 0px;
+      }
+    </style>
+  </head>
+
+  <body class="light-mode">
+    <!-- IMAGE EFFECT -->
+    <div class="image-effect" id="image-effect-2">
+      <img
+        src="https://hanoispiritofplace.com/wp-content/uploads/2017/11/hinh-nen-ban-dem-33.jpg"
+        class="fadeEffect"
+        id="theme-icon-off"
+      />
+      <img
+        src="https://tse1.mm.bing.net/th/id/OIP.yFjEFo3Rj-3VVoJBRF4v3gHaE7?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+        id="theme-icon-on"
+      />
+    </div>
+
+    <!-- Switch Button -->
+    <div class="switch-btn">
+      <div class="onoffswitch">
+        <input
+          type="checkbox"
+          name="onoffswitch"
+          class="onoffswitch-checkbox toggle-switch-2"
+          id="myonoffswitch"
+          tabindex="0"
+          checked
+        />
+        <label class="onoffswitch-label" for="myonoffswitch">
+          <span class="onoffswitch-inner"></span>
+          <span class="onoffswitch-switch"></span>
+        </label>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $("#myonoffswitch").change(function () {
+          if ($(this).is(":checked")) {
+            $("body").removeClass("dark-mode").addClass("light-mode");
+            $("#theme-icon-on").fadeIn();
+            $("#theme-icon-off").fadeOut();
+          } else {
+            $("body").removeClass("light-mode").addClass("dark-mode");
+            $("#theme-icon-off").fadeIn();
+            $("#theme-icon-on").fadeOut();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

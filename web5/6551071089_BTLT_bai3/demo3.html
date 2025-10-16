@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <table id="sampleTable" border="1">
+      <tr>
+        <td>Row1 cell1</td>
+        <td>Row1 cell2</td>
+      </tr>
+      <tr>
+        <td>Row2 cell1</td>
+        <td>Row2 cell2</td>
+      </tr>
+    </table>
+    <br />
+    <input id="nut" type="button" onclick="insert_Row()" value="Insert row" />
+    <script>
+      $("#nut").click(function insert_Row() {
+        var table = document.getElementById("sampleTable");
+        var x = table.insertRow(-1);
+        var y = x.insertCell(0);
+        var z = x.insertCell(1);
+        y.innerHTML = "New row cell1";
+        z.innerHTML = "New row cell2";
+      });
+    </script>
+  </body>
+</html>

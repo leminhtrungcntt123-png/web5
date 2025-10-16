@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Show / Hide</title>
+<!-- Font Awesome CDN (icon con mắt) -->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .password-show-card {
+    position: relative;
+    width: 300px;
+  }
+
+  .input-control {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  .password-show {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    font-size: 18px;
+    transition: color 0.2s;
+  }
+
+  .password-show:hover {
+    color: #000;
+  }
+</style>
+</head>
+<body>
+
+  <div class="password-show-card">
+    <input type="password" class="input-control" placeholder="Enter Password">
+    <i class="fa fa-eye password-show"></i>
+  </div>
+
+<script>
+  $(document).ready(function () {
+    $(".password-show").on("click", function () {
+      const input = $(this).siblings(".input-control");
+      const type = input.attr("type");
+
+      if (type === "password") {
+        input.attr("type", "text");
+        $(this).removeClass("fa-eye").addClass("fa-eye-slash"); 
+      } else {
+        input.attr("type", "password"); 
+        $(this).removeClass("fa-eye-slash").addClass("fa-eye"); 
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

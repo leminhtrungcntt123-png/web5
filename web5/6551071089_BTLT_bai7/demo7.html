@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chuyen huong den duong link</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <h1>Nhập đường link và nhấn "Submit" để chuyển hướng:</h1>
+    <form id="linkForm">
+      <input type="text" id="linkInput" placeholder="Nhập đường link" />
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+        $("#linkForm").submit(function(event){
+            event.preventDefault();
+            var link=$("#linkInput").val();
+            if(!link.startsWith("http://")&&!link.startsWith("https://")){
+                link ="https://"+link;
+            }
+            window.open(link,"_blank");
+        })
+    </script>
+  </body>
+</html>

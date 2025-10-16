@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style type="text/css">
+      body {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button id="jsstyle" onclick="display_random_image();">Show Image</button>
+    </div>
+    <div id="imageContainer"></div>
+
+    <script>
+      const Image = [
+        {
+          src: "http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg",
+          width: "240",
+          height: "160",
+        },
+        {
+          src: "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg",
+          width: "320",
+          height: "195",
+        },
+        {
+          src: "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg",
+          width: "500",
+          height: "343",
+        },
+      ];
+      $("#jsstyle").click(function display_random_image() {
+        const randomIndex = Math.floor(Math.random() * Image.length);
+        const imgInfor = Image[randomIndex];
+        $("#imageContainer").empty();
+        const img = $("<img>")
+          .attr("src", imgInfor.src)
+          .attr("width", imgInfor.width)
+          .attr("height", imgInfor.height);
+        $("#imageContainer").append(img);
+      });
+    </script>
+  </body>
+</html>

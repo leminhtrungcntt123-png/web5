@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <form id="calculateForm">
+      <input id="num1" type="number" required />
+      <select id="operators">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="^">^</option>
+      </select>
+      <input type="number" id="num2" required />
+      <button type="submit">=</button>
+      <input type="text" id="result" readonly />
+    </form>
+    <script>
+      $("#calculateForm").submit(function (event) {
+        event.preventDefault();
+        const a = parseFloat($("#num1").val());
+        const b = parseFloat($("#num2").val());
+        const op = $("#operators").val();
+        let res;
+        switch (op) {
+          case "+":
+            res = a + b;
+            break;
+          case "-":
+            res = a - b;
+            break;
+          case "*":
+            res = a * b;
+            break;
+          case "/":
+            res = a / b;
+            break;
+            case "^":
+            res=Math.pow(a,b);
+            break;
+            default: res="error";
+        }
+        $("#result").val(res);
+      });
+    </script>
+  </body>
+</html>

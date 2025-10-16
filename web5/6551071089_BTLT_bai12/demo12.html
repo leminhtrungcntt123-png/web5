@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">	
+<title>Checkbox Div Hide Show</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    body {
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+    .checkbox-card {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        width: 300px;
+    }
+    .passport-box {
+        margin-top: 10px;
+        display: none; /* Ẩn mặc định */
+    }
+    .apply-box {
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+<h4>Checkbox Div Hide Show</h4>
+
+<!-- Passport -->
+<div class="checkbox-card">
+	<label>Do You have Passport</label>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" class="checkme"> Yes
+		</label>
+	</div>
+	<div class="passport-box">
+		<input type="text" placeholder="Enter Passport Number" class="form-control">
+	</div>
+	<div class="apply-box">
+		<a href="#">Apply For Passport</a>
+	</div>
+</div>
+
+<!-- Credit Card -->
+<div class="checkbox-card">
+	<label>Do You have Credit Card</label>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" class="checkme"> Yes
+		</label>
+	</div>
+	<div class="passport-box">
+		<input type="text" placeholder="Enter Credit Card Number" class="form-control">
+	</div>
+	<div class="apply-box">
+		<a href="#">Apply For Credit Card</a>
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    $(".checkme").change(function(){
+
+        let box = $(this).closest(".checkbox-card").find(".passport-box");
+
+        if($(this).is(":checked")){
+            box.slideDown();   
+        } else {
+            box.slideUp();     
+        }
+    });
+});
+</script>
+
+</body>
+</html>

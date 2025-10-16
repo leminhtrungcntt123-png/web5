@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tạo Tabs bằng jQuery</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        padding: 30px;
+      }
+
+      .tab-wrapper {
+        width: 500px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      /* Thanh menu tab */
+      .tab {
+        list-style: none;
+        display: flex;
+        background-color: #c8e65d;
+        border: radius 10px; ;
+      }
+
+      .tab li {
+        flex: 1;
+      }
+
+      .tab li a {
+        display: block;
+        text-align: center;
+        padding: 12px 0;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        background-color: #3c9cd2;
+        transition: all 0.3s ease;
+      }
+
+      .tab li a.active {
+        background-color: white;
+        color: #2c50d3;
+        border-top: 3px solid #2c50d3;
+      }
+
+      /* Nội dung tab */
+      .tab-content {
+        padding: 20px;
+        min-height: 100px;
+      }
+
+      .tab-item {
+        display: none;
+      }
+
+      .tab-item.active {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="tab-wrapper">
+      <ul class="tab">
+        <li><a href="#tab-main-info" class="active">THÔNG TIN CHÍNH</a></li>
+        <li><a href="#tab-image">HÌNH ẢNH</a></li>
+        <li><a href="#tab-seo">SEO</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-item active" id="tab-main-info">
+          Tab thông tin chính
+        </div>
+        <div class="tab-item" id="tab-image">Tab hình ảnh</div>
+        <div class="tab-item" id="tab-seo">Tab SEO</div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $(".tab li a").click(function (e) {
+          e.preventDefault();
+
+          $(".tab li a").removeClass("active");
+
+          $(this).addClass("active");
+
+          $(".tab-item").removeClass("active");
+
+          var tab_id = $(this).attr("href");
+
+          $(tab_id).addClass("active");
+        });
+      });
+    </script>
+  </body>
+</html>

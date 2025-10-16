@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+      body { text-align: center; font-family: Arial, sans-serif; }
+      form div { margin: 10px 0; }
+      label { display: inline-block; width: 200px; text-align: right; margin-right: 10px; }
+      .error { color: red; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h2>Personal Information</h2>
+    <form id="formInfor">
+      <div>
+        <label for="name">Enter name*:</label>
+        <input type="text" id="name" />
+      </div>
+
+      <div>
+        <label>Sex*:</label>
+        <input type="radio" name="sex" value="male" />Male
+        <input type="radio" name="sex" value="female" />Female
+      </div>
+
+      <div>
+        <label for="email">Enter email address*:</label>
+        <input type="text" id="email" />
+      </div>
+
+      <div>
+        <label for="birthday">Enter birthday (MM/DD/YYYY)*:</label>
+        <input type="text" id="birthday" placeholder="MM/DD/YYYY" />
+      </div>
+
+      <div>
+        <label for="address">Enter street address*:</label>
+        <input type="text" id="address" />
+      </div>
+
+      <div>
+        <label for="city">Enter city*:</label>
+        <input type="text" id="city" />
+      </div>
+
+      <div>
+        <label for="region">Select a region*:</label>
+        <select id="region">
+          <option value="">--Select--</option>
+          <option>North</option>
+          <option>South</option>
+          <option>East</option>
+          <option>West</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="zipcode">Enter 5-digit ZIP code*:</label>
+        <input type="text" id="zipcode" />
+      </div>
+
+      <div>
+        <button type="submit">Finish</button>
+        <button type="button" id="Clear">Clear</button>
+      </div>
+      <p id="errorMsg" class="error"></p>
+    </form>
+
+    <script>
+      $(document).ready(function () {
+        // Nút clear
+        $("#Clear").click(function () {
+          $("#formInfor")[0].reset();
+          $("#errorMsg").text("");
+        });
+
+        // Submit form
+        $("#formInfor").on("submit", function (e) {
+          e.preventDefault();
+
+          const name = $("#name").val().trim();
+          const sex = $("input[name='sex']:checked").val();
+          const email = $("#email").val().trim();
+          const birthday = $("#birthday").val().trim();
+          const address = $("#address").val().trim();
+          const city = $("#city").val().trim();
+          const region = $("#region").val().trim();
+          const zipcode = $("#zipcode").val().trim();
+
+          if (!name || !sex || !email || !birthday || !address || !city || !region || !zipcode) {
+            return showError("❌ Vui lòng nhập đầy đủ các trường bắt buộc (*)");
+          }
+
+          const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+          if (!emailRegex.test(email)) {
+            return showError("❌ Email không hợp lệ");
+          }
+
+          const dateRegex = /^(0[1-9]|1[0-2])[\/\-](0[1-9]|[12]\d|3[01])[\/\-](\d{4})$/;
+          if (!dateRegex.test(birthday)) {
+            return showError("❌ Ngày sinh không hợp lệ (MM/DD/YYYY)");
+          }
+
+          if (!/^\d{5}$/.test(zipcode)) {
+            return showError("❌ ZIP code phải có đúng 5 chữ số");
+          }
+
+          $("#errorMsg").text("");
+          alert("✅ Đăng ký thành công!");
+        });
+
+        function showError(msg) {
+          $("#errorMsg").text(msg);
+          return false;
+        }
+      });
+    </script>
+  </body>
+</html>

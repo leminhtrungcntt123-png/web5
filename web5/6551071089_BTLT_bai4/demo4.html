@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      body {
+        margin: 30px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <form>
+      <select id="colorSelect">
+        <option>Red</option>
+        <option>Green</option>
+        <option>White</option>
+        <option>Black</option>
+      </select>
+      <input
+        id="nut"
+        type="button"
+        onclick="removecolor()"
+        value="Select and Remove"
+      />
+    </form>
+    <script>
+      $("#nut").click(function removecolor() {
+        var x = document.getElementById("colorSelect");
+        x.remove(x.selectedIndex);
+      });
+    </script>
+  </body>
+</html>

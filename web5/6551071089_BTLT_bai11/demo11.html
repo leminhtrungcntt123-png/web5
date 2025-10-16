@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Custom File Input</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        text-align: center;
+    }
+    .custom-file-wrp {
+        display: inline-block;
+        padding: 15px;
+        border: 2px dashed #aaa;
+        border-radius: 8px;
+    }
+    .filename {
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #555;
+    }
+    .custom-file label {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .custom-file input[type="file"] {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<h2 class="text-center">Custom File Input</h2>
+
+<div class="custom-file-wrp">
+	<div class="filename">Ex: sample.jpg</div>
+	<div class="custom-file">
+		<label for="fileupload">Upload</label>
+		<input type="file" id="fileupload">
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $("#fileupload").on("change", function(){
+        let fullPath = $(this).val();
+        let fileName = fullPath.split("\\").pop();
+        $(".filename").text(fileName);
+    });
+});
+</script>
+
+</body>
+</html>
