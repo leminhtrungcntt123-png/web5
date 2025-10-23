@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.slideshow-container {
+    position: relative;
+    width: 1050px; /* Chiều rộng để hiển thị 5 ảnh (5 * 200px) + khoảng cách (5*10px) */
+    margin: auto;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    background-color: white;
+}
+
+/* Vùng chứa ẩn đi những ảnh không được hiển thị */
+.slideshow-inner {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Thanh trượt chứa tất cả ảnh */
+.slideshow-slide {
+    display: flex; /* Sắp xếp các ảnh nằm ngang */
+    position: relative;
+    /* transition để tạo hiệu ứng trượt mượt mà */
+    transition: transform 0.5s ease-in-out; 
+}
+
+.slideshow-slide img {
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 10px; /* Khoảng cách giữa các ảnh */
+}
+
+/* Định dạng nút bấm Trước/Sau */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -30px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.3s ease;
+    background-color: rgba(40, 194, 208, 0.5);
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+    color: blue;
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 5px 5px 0;
+    color: red;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(59, 218, 91, 0.8);
+    color:pink;
+}

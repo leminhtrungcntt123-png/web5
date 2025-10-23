@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles21.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+   <div class="container">
+        <h1>WORK TO-DOS</h1>
+        <div class="desc">Enter text into the input field to add items to your list.</div>
+        <div class="desc2">Click the item to mark it as complete.<br>Click the "X" to remove the item from your list.</div>
+        <input type="text" id="new-item" placeholder="New item...">
+        <button id="add-btn">&#9998;</button>
+        <ul id="todo-list">
+
+        </ul>
+    </div>
+      <script>
+        $(document).ready(function(){
+            // Thêm công việc mới
+            $('#add-btn').click(function(){
+                let text = $('#new-item').val().trim();
+                if(text){$('#todo-list').append(
+                        `<li>
+                            <span class="item-text">${text}</span>
+                            <button class="remove-btn">X</button>
+                        </li>`
+                    );
+                    $('#new-item').val('');
+                }
+            });
+            // Thêm bằng phím Enter
+            $('#new-item').keypress(function(e){
+                if(e.which === 13){
+                    $('#add-btn').click();
+                }
+            });
+            // Đánh dấu hoàn thành khi click vào công việc
+            $('#todo-list').on('click', '.item-text', function(){
+                $(this).parent().toggleClass('completed');
+            });
+            // Xóa công việc khi nhấn nút X
+            $('#todo-list').on('click', '.remove-btn', function(e){
+                $(this).parent().remove();
+            });
+        });
+    </script>
+</body>
+</html>
+  </body>
+</html>

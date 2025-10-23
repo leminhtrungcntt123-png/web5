@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Thêm và xóa hàng trong Table </title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+</head>
+<body style="border:1px solid grey">
+  	<h2>Quản lý thông tin user</h2>
+    <form>
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="email" placeholder="Email Address">
+        <input type="text" placeholder="Birthdate" id="datepicker">
+    	<input type="button" class="add-row" value="Add Row">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Birthdate</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <button type="button" class="delete-row">Delete Row</button>
+    <script>
+$(document).ready(function(){
+    
+    // ----- YÊU CẦU: ĐỊNH DẠNG NGÀY THÁNG -----
+    // Kích hoạt jQuery UI Datepicker cho ô có id="datepicker"
+    $("#datepicker").datepicker({
+        dateFormat: "dd/mm/yy" // Định dạng ngày tháng kiểu Việt Nam
+    });
+
+    // ----- HÀM KIỂM TRA EMAIL ĐÚNG ĐỊNH DẠNG -----
+    function validateEmail(email) {
+        // Biểu thức chính quy (Regex) đơn giản để kiểm tra email
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    // ----- HÀM KIỂM TRA ĐỊNH DẠNG NGÀY dd/mm/yyyy -----
+    function validateDate(dateString) {
+        // Biểu thức chính quy (Regex)
+        // Yêu cầu định dạng là dd/mm/yyyy (ví dụ: 23/10/2025)
+        // Datepicker đang dùng dateFormat: "dd/mm/yy" nên sẽ ra 2 số
+        var dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        return dateRegex.test(dateString);
+    }
+
+    // ----- YÊU CẦU: THÊM HÀNG KHI NHẤN "ADD ROW" -----
+    $(".add-row").click(function(){
+        // 1. Lấy giá trị từ các ô input
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var birthdate = $("#datepicker").val();
+        
+        // 2. Kiểm tra (Validate) dữ liệu
+        if (name === "" || email === "" || birthdate === "") {
+            alert("Vui lòng điền đầy đủ thông tin.");
+            return; // Dừng lại nếu có ô bị trống
+        }
+
+        // 3. Yêu cầu: Kiểm tra định dạng email
+        if (!validateEmail(email)) {
+            alert("Email không đúng định dạng. Vui lòng nhập lại.");
+            return; // Dừng lại nếu email sai
+        }
+        
+        // 4. Tạo chuỗi HTML cho hàng mới (<tr>)
+        var newRow = `
+            <tr><td><input type="checkbox"></td>
+                <td>${name}</td>
+                <td>${email}</td>
+                <td>${birthdate}</td>
+            </tr>
+        `;
+        
+        // 5. Thêm hàng mới vào <tbody> của bảng
+        $("table tbody").append(newRow);
+        
+        // 6. Xóa trắng các ô input sau khi thêm
+        $("#name").val("");
+        $("#email").val("");
+        $("#datepicker").val("");
+    });
+
+    // ----- YÊU CẦU: XÓA HÀNG KHI NHẤN "DELETE ROW" -----
+    $(".delete-row").click(function(){
+        // 1. Tìm tất cả các checkbox bên trong <tbody> đang được "checked"
+        $("table tbody input[type='checkbox']:checked").each(function(){
+            // 2. Với mỗi checkbox được check, tìm thẻ <tr> (hàng) cha của nó
+            // 3. Xóa (remove) thẻ <tr> đó khỏi bảng
+            $(this).closest("tr").remove();
+        });
+    });
+});
+</script>                                                                                
+</body> 
+</html>
